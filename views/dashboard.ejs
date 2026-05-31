@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>PayPal Dashboard</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+<%- include("partials/header") %>
+
+<div class="container">
+
+    <%- include("partials/sidebar") %>
+
+    <div class="content">
+
+        <div class="content-header">
+            <h1>Payment Cards</h1>
+
+            <a href="/add" class="btn">
+                Add New Card
+            </a>
+        </div>
+
+        <div class="cards-grid">
+
+            <% cards.forEach(card => { %>
+
+                <div class="card-box">
+
+                    <div class="card-top">
+                        <span>VISA</span>
+                        <span>$<%= card.balance %></span>
+                    </div>
+
+                    <h3><%= card.owner_name %></h3>
+
+                    <p><%= card.card_number %></p>
+
+                    <p><%= card.country %></p>
+
+                    <div class="actions">
+
+                        <a href="/edit/<%= card.id %>">
+                            Edit
+                        </a>
+
+                        <form
+                            action="/delete/<%= card.id %>?_method=DELETE"
+                            method="POST"
+                        >
+                            <button type="submit">
+                                Delete
+                            </button>
+                        </form>
+
+                    </div>
+
+                </div>
+
+            <% }) %>
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>
